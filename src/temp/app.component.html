@@ -1,0 +1,262 @@
+<section class="flex flex-col m-10 bg-red-50 p-6">
+  <header class="flex flex-col">
+    <div class="flex">
+      <figure class="relative inline-block mr-4">
+        <!-- Avatar -->
+        <img
+          class="w-12 h-12 rounded-full"
+          src="https://picsum.photos/200"
+          alt="Avatar"
+        />
+        <!-- Indicador de estado -->
+        <span
+          class="absolute bottom-0 right-0 block w-3 h-3 bg-green-500 rounded-full ring-2 ring-white"
+        ></span>
+      </figure>
+
+      <h6>Operador: John Doe</h6>
+
+      <h6 class="!ml-auto flex items-center gap-4">
+        <mat-icon fontIcon="videocam"></mat-icon>
+        {{ currentDate | date : "dd-MM-yyyy, HH:mm:ss" }}
+      </h6>
+    </div>
+    <h4 class="!mt-6 text-center">Proforma de Venta</h4>
+  </header>
+
+  <section class="mb-6">
+    <form class="flex w-full gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>N° de Documento de Indentidad</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="numberFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="70609289"
+        />
+        <mat-hint>Perfecto!</mat-hint>
+        @if (numberFormControl.hasError('pattern') &&
+        !numberFormControl.hasError('required')) {
+        <mat-error
+          >Por favor digita correctamente tu documento de identidad</mat-error
+        >
+        } @if (numberFormControl.hasError('required')) {
+        <mat-error
+          >El N° de Documento de identidad es requerido
+          <strong>required</strong></mat-error
+        >
+        } @if (numberFormControl.hasError('maxLength') ||
+        numberFormControl.hasError('minLength')) {
+        <mat-error
+          >Digite bien su<strong>Documento de Identidad</strong></mat-error
+        >
+        }
+      </mat-form-field>
+
+      <button
+        class="w-12 h-12 grid place-content-center p-2 bg-red-500 hover:bg-red-700 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+      >
+        <mat-icon fontIcon="search"></mat-icon>
+      </button>
+    </form>
+  </section>
+
+  <section class="flex">
+    <figure class="flex -space-x-1 overflow-hidden mr-4">
+      <img
+        class="inline-block size-12 rounded-full ring-1 ring-white"
+        src="https://img.freepik.com/premium-photo/indian-young-girl-face-with-skin-detail_1130181-28665.jpg?w=740"
+        alt=""
+      />
+    </figure>
+
+    <h6>Joane Nurmagomedov</h6>
+    <h6 class="!ml-auto">70656667</h6>
+  </section>
+
+  <hr class="my-6" />
+
+  <section class="flex flex-col">
+    <h6 class="text-center">Agendar Cita</h6>
+    <div
+      class="w-full p-4 bg-white border border-gray-300 rounded-lg shadow-md"
+    >
+      <form class="grid grid-cols-2 gap-4">
+        <!-- Cuarta fila -->
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Categoría</mat-label>
+            <input
+              type="text"
+              placeholder="Pick one"
+              aria-label="Categoría"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Number</mat-label>
+            <input
+              type="text"
+              placeholder="Pick one"
+              aria-label="Number"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+<!-- 
+        <mat-form-field class="col-span-1">
+          <mat-label>Selecciona la fecha de la cita</mat-label>
+          <input matInput [matDatepicker]="picker1" [formControl]="date" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field> -->
+        
+        <mat-form-field class="col-span-1">
+          <mat-label>Fecha de reserva</mat-label>
+          <input matInput [min]="minDate" [matDatepicker]="picker1" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        
+
+        <div class="col-span-1 grid grid-cols-2 gap-4">
+          <!--
+            <div>
+              <input
+                class="w-full col-span-1 p-2 border border-orange-500 rounded"
+                placeholder="Min time 03:15 am"
+                [ngxTimepicker]="min"
+                [min]="'03:15 am'"
+                readonly
+                (ngModelChange)="onPrimaryDateTimeChange()"
+              />
+              <ngx-material-timepicker #min></ngx-material-timepicker>
+            </div>
+  
+            <div>
+              <input
+                class="w-full col-span-1 p-2 border border-orange-500 rounded"
+                placeholder="Max time 06:18 pm"
+                [ngxTimepicker]="max"
+                max="06:18 pm"
+                readonly
+              />
+              <ngx-material-timepicker #max></ngx-material-timepicker>
+            </div>
+          </div>
+  
+          
+    
+            <div class="col-span-1 my-datepick ">
+              <input [ngxTimepicker]="toggleTimepicker" [disableClick]="false" readonly
+              placeholder="06:18 pm"
+              >
+              <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+            </div> 
+          -->
+          <div class="col-span-1 my-datepick">
+            <input
+              [ngxTimepicker]="ngxTimepickerX"
+              [disableClick]="false"
+              readonly
+              placeholder="11:11 AM"
+            />
+            <ngx-material-timepicker-toggle
+              [for]="ngxTimepickerX"
+            ></ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #ngxTimepickerX
+            (timeSet)="onTimeSet($event)"
+            >
+            </ngx-material-timepicker>
+          </div>
+          <!-- 
+          <input 
+            class="bg-green-500" 
+            [ngxTimepicker]="picker" 
+            (click)="picker.open()" readonly>
+            <ngx-material-timepicker 
+            #picker 
+            (hourSelected)="onHourSelected($event)" 
+            (timeSet)="onTimeSet($event)"
+            ></ngx-material-timepicker> -->
+        </div>
+
+        <!-- Primera fila -->
+        <div class="col-span-2">
+          <input
+            type="text"
+            placeholder="Campo 1"
+            class="w-full p-2 border border-red-500 rounded"
+          />
+        </div>
+        <!-- Segunda fila -->
+        <div class="col-span-2">
+          <input
+            type="text"
+            placeholder="Campo 2"
+            class="w-full p-2 border border-red-500 rounded"
+          />
+        </div>
+        <!-- Tercera fila -->
+        <div class="col-span-2 grid grid-cols-3 gap-4">
+          <input
+            type="text"
+            placeholder="Campo 3.1"
+            class="w-full p-2 border border-orange-500 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Campo 3.2"
+            class="w-full p-2 border border-orange-500 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Campo 3.3"
+            class="w-full p-2 border border-orange-500 rounded"
+          />
+        </div>
+      </form>
+
+      <!--  <form>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Selecciona fecha y hora" [(ngModel)]="primaryDateTime" name="primaryDateTime" (ngModelChange)="onPrimaryDateTimeChange()">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+   
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Selecciona fecha y hora" [(ngModel)]="secondaryDateTime" name="secondaryDateTime" [min]="minSecondaryDateTime">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </form> -->
+
+      <!-- <input class="bg-green-500" [ngxTimepicker]="picker" (click)="picker.open()" readonly>
+      <ngx-material-timepicker #picker (hourSelected)="onHourSelected($event)" (timeSet)="onTimeSet($event)"></ngx-material-timepicker> -->
+    </div>
+  </section>
+</section>

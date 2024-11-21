@@ -5,7 +5,11 @@
   "projects": {
     "myapp": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -27,7 +31,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -85,12 +90,16 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2abda01a-fb14-4794-901b-5d0bd1872c2f"
   }
 }

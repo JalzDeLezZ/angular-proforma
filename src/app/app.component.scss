@@ -1,0 +1,46 @@
+.date-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  
+
+  .example-container mat-form-field + mat-form-field {
+    //margin-left: 8px;
+  }
+  
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+
+  .my-datepick {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: fit-content;
+    border-bottom: 1px solid black;
+    border-radius: 4px 4px 0 0;
+    background: #f3dde1;
+    &:hover { background-color: darken(#f3dde1, 5%); // Oscurece el color en un 20% }
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 12px;
+      outline: none;
+      border: none;
+      background: transparent;
+    }
+    ngx-material-timepicker-toggle {
+      padding: 12px
+    }
+  }
